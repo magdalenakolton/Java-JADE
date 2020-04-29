@@ -3,7 +3,7 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
-public class ag_odb extends Agent {
+public class agent_odbiorca extends Agent {
     private MessageTemplate template = MessageTemplate.MatchOntology("my_onto");
     protected void setup() {
         addBehaviour(new CyclicBehaviour(this) {
@@ -16,22 +16,19 @@ public class ag_odb extends Agent {
                         System.out.println("REQUEST message : "+message.getContent());
                         reply.setPerformative(ACLMessage.INFORM);
                         reply.setContent("Done!");
-                        System.out.println("Reply from receiver: " + reply);
 
                     }
                     else if(message.getPerformative()==3) {
                         System.out.println("CFP message : "+message.getContent());
                         reply.setPerformative(ACLMessage.REQUEST);
                         reply.setContent("Once again.");
-                        System.out.println("Reply from receiver: " + reply);
                     }
                     else {
                         reply.setPerformative(ACLMessage.NOT_UNDERSTOOD);
                         reply.setContent("Unknown message type.");
-                        System.out.println("Reply from receiver: " + reply);
                     }
                     myAgent.send(reply);
-
+                    System.out.println("Reply from receiver: " + reply);
                 }
                 else {
                     block();
